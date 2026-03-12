@@ -5,7 +5,11 @@ export async function POST(request: NextRequest) {
   const { password } = await request.json();
 
   if (!validatePassword(password)) {
-    return NextResponse.json({ error: "Contraseña incorrecta" }, { status: 401 });
+    const isConfigured = !!process.env.APP_PASSWORD;
+    const msg = isConfigured 
+      ? "Contraseña incorrecta" 
+      : "Error de Vercel: Variable APP_PASSWORD no encontrada";
+    return NextResponse.json({ error: msg }, { status: 401 });
   }
 
   createSession();
