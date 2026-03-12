@@ -24,7 +24,8 @@ export default function LoginPage() {
       router.push("/");
       router.refresh();
     } else {
-      setError("Contraseña incorrecta. Intenta de nuevo.");
+      const data = await res.json().catch(() => null);
+      setError(data?.error || "Contraseña incorrecta. Intenta de nuevo.");
       setLoading(false);
     }
   };
