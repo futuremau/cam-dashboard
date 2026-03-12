@@ -9,6 +9,7 @@ export function middleware(request: NextRequest) {
 
   // Rutas públicas — no requieren auth
   if (
+    pathname.startsWith("/api") || // Excluir rutas de API para que funcionen
     pathname.startsWith("/login") ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/icons") ||
