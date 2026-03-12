@@ -105,6 +105,20 @@ export default function HomePage() {
             </div>
             <span className="text-gray-400 text-xl">›</span>
           </Link>
+
+          <Link
+            href="/dashboard"
+            className="bg-white border text-gray-100 border-gray-700 bg-gray-800 rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow active:scale-[0.98] mt-2"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-gray-700 flex items-center justify-center text-2xl flex-shrink-0">
+              📊
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-white text-base">KPI Dashboard</p>
+              <p className="text-gray-300 text-sm mt-0.5">Métricas y estadísticas globales</p>
+            </div>
+            <span className="text-gray-400 text-xl">›</span>
+          </Link>
         </div>
       </main>
 

@@ -141,7 +141,22 @@ export async function getRecentRecords(limit = 30) {
     // Intentar obtener el total calculado por Notion (fórmula) o sumar manualmente
     const totalNeto = props["Total Neto"]?.formula?.number ?? null;
     const sumaDia = props["Suma por Día"]?.formula?.number ?? null;
-    return { fecha, totalNeto, sumaDia };
+    
+    // Extracción detallada para KPIs
+    const efectivo = props.Efectivo?.number ?? null;
+    const posBac = props["POS BAC"]?.number ?? null;
+    const bac = props.BAC?.number ?? null;
+    const atlantida = props["Atlántida"]?.number ?? null;
+    const ficohsa = props.Ficohsa?.number ?? null;
+    const banpais = props["BanPaís"]?.number ?? null;
+    const occidente = props.Occidente?.number ?? null;
+    const banrural = props.BanRural?.number ?? null;
+    const tigoMoney = props["Tigo Money"]?.number ?? null;
+
+    return { 
+      fecha, totalNeto, sumaDia,
+      efectivo, posBac, bac, atlantida, ficohsa, banpais, occidente, banrural, tigoMoney
+    };
   };
 
   return {
