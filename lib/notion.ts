@@ -164,3 +164,65 @@ export async function getRecentRecords(limit = 30) {
     bancario: bancarioRes.results.map(extractProps),
   };
 }
+
+export async function getRecordsByDateRange(startDate: string, endDate: string) {
+  const fetchAll = async (database_id: string) => {
+    let results: any[] = [];
+    let has_more = true;
+    let next_cursor: string | undefined = undefined;
+
+    while (has_more) {
+      const response = await notion.databases.query({
+        database_id,
+        filter: {
+          and: [
+            { property: "Fecha", date: { on_or_after: startDate } },
+            { property: "Fecha", date: { on_or_before: endDate } }
+          ]
+        },
+        sorts: [{ property: "Fecha", direction: "descending" }],
+        page_size: 100,
+        start_cursor: next_cursor,
+      });
+      
+      results = results.concat(response.results);
+      has_more = response.has_more;
+      next_cursor = response.next_cursor ?? undefined;
+    }
+    return results;
+  };
+
+  const [cierreRes, bancarioRes] = await Promise.all([
+    fetchAll(DB_CIERRE),
+    fetchAll(DB_BANCARIO)
+  ]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const extractProps = (page: any) => {
+    const props = page.properties;
+    const fecha = props.Fecha?.date?.start ?? "—";
+    const totalNeto = props["Total Neto"]?.formula?.number ?? null;
+    const sumaDia = props["Suma por Día"]?.formula?.number ?? null;
+    
+    // Extracción detallada para KPIs
+    const efectivo = props.Efectivo?.number ?? null;
+    const posBac = props["POS Bac"]?.number ?? null;
+    const bac = props.BAC?.number ?? null;
+    const atlantida = props["Atlantida"]?.number ?? null;
+    const ficohsa = props.Ficohsa?.number ?? null;
+    const banpais = props["Banpais"]?.number ?? null;
+    const occidente = props.Occidente?.number ?? null;
+    const banrural = props.BanRural?.number ?? null;
+    const tigoMoney = props["Tigo Money"]?.number ?? null;
+
+    return { 
+      fecha, totalNeto, sumaDia,
+      efectivo, posBac, bac, atlantida, ficohsa, banpais, occidente, banrural, tigoMoney
+    };
+  };
+
+  return {
+    cierre: cierreRes.map(extractProps),
+    bancario: bancarioRes.map(extractProps),
+  };
+}
