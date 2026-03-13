@@ -28,6 +28,13 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             type="number"
             step="0.01"
             min="0"
+            inputMode="decimal"
+            pattern="[0-9]*"
+            onKeyDown={(e) => {
+              if (["e", "E", "+", "-"].includes(e.key)) {
+                e.preventDefault();
+              }
+            }}
             placeholder={placeholder}
             className={`w-full pl-8 pr-3 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-colors
               ${error

@@ -50,7 +50,7 @@ export default function HomePage() {
       </header>
 
       {/* Content */}
-      <main className="flex-1 p-4 space-y-4">
+      <main className="flex-1 p-5 space-y-6 pb-12">
         {/* Estado del día */}
         {loading ? (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 animate-pulse h-32" />
@@ -58,66 +58,78 @@ export default function HomePage() {
           <DayStatus cierre={status.cierre} bancario={status.bancario} fecha={fecha} />
         )}
 
-        {/* Acciones principales */}
-        <div className="grid grid-cols-1 gap-3">
+        {/* Acciones principales - Nuevo Grid Cuadrado */}
+        <div className="grid grid-cols-2 gap-4">
+          
           <Link
             href="/cierre"
-            className="bg-white border border-gray-100 rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow active:scale-[0.98]"
+            className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex flex-col items-center justify-center text-center gap-3 hover:shadow-md transition-shadow active:scale-[0.98] aspect-square relative overflow-hidden"
           >
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 ${status.cierre ? "bg-green-100" : "bg-green-600"}`}>
+            <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl ${status.cierre ? "bg-green-50" : "bg-gray-50"}`}>
               {status.cierre ? "✅" : "💰"}
             </div>
-            <div className="flex-1">
-              <p className="font-bold text-gray-800 text-base">Cierre Tienda</p>
-              <p className="text-gray-500 text-sm mt-0.5">
-                {status.cierre ? "Ya registrado hoy" : "Ventas y comisiones del día"}
+            <div>
+              <p className="font-bold text-gray-800 text-[15px] leading-tight flex flex-col"><span>Cierre</span><span>Tienda</span></p>
+              <p className="text-gray-400 text-[11px] mt-1.5 font-medium uppercase tracking-wider">
+                {status.cierre ? "Registrado" : "Ingresar"}
               </p>
             </div>
-            <span className="text-gray-400 text-xl">›</span>
+            {status.cierre && <div className="absolute top-0 right-0 w-12 h-12 bg-green-500 rounded-bl-full -translate-y-6 translate-x-6 opacity-20"></div>}
           </Link>
 
           <Link
             href="/bancario"
-            className="bg-white border border-gray-100 rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow active:scale-[0.98]"
+            className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex flex-col items-center justify-center text-center gap-3 hover:shadow-md transition-shadow active:scale-[0.98] aspect-square relative overflow-hidden"
           >
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 ${status.bancario ? "bg-green-100" : "bg-blue-600"}`}>
+            <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl ${status.bancario ? "bg-blue-50" : "bg-gray-50"}`}>
               {status.bancario ? "✅" : "🏦"}
             </div>
-            <div className="flex-1">
-              <p className="font-bold text-gray-800 text-base">Cierre Bancario</p>
-              <p className="text-gray-500 text-sm mt-0.5">
-                {status.bancario ? "Ya registrado hoy" : "Saldos por entidad bancaria"}
+            <div>
+              <p className="font-bold text-gray-800 text-[15px] leading-tight flex flex-col"><span>Cierre</span><span>Bancario</span></p>
+              <p className="text-gray-400 text-[11px] mt-1.5 font-medium uppercase tracking-wider">
+                {status.bancario ? "Registrado" : "Ingresar"}
               </p>
             </div>
-            <span className="text-gray-400 text-xl">›</span>
+            {status.bancario && <div className="absolute top-0 right-0 w-12 h-12 bg-blue-500 rounded-bl-full -translate-y-6 translate-x-6 opacity-20"></div>}
           </Link>
 
           <Link
             href="/historial"
-            className="bg-white border border-gray-100 rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow active:scale-[0.98]"
+            className="bg-white border border-gray-100 rounded-3xl shadow-sm p-4 flex flex-col items-center justify-center text-center gap-3 hover:shadow-md transition-shadow active:scale-[0.98] aspect-square"
           >
-            <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center text-2xl flex-shrink-0">
+            <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center text-3xl">
               📋
             </div>
-            <div className="flex-1">
-              <p className="font-bold text-gray-800 text-base">Historial</p>
-              <p className="text-gray-500 text-sm mt-0.5">Últimos 30 registros</p>
+            <div>
+              <p className="font-bold text-gray-800 text-[15px] leading-tight flex flex-col"><span>Historial</span><span>Registros</span></p>
+              <p className="text-gray-400 text-[11px] mt-1.5 font-medium uppercase tracking-wider">Últimos 30</p>
             </div>
-            <span className="text-gray-400 text-xl">›</span>
           </Link>
 
           <Link
             href="/dashboard"
-            className="bg-white border text-gray-100 border-gray-700 bg-gray-800 rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow active:scale-[0.98] mt-2"
+            className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-800 rounded-3xl shadow-md p-4 flex flex-col items-center justify-center text-center gap-3 hover:shadow-lg transition-shadow active:scale-[0.98] aspect-square"
           >
-            <div className="w-14 h-14 rounded-2xl bg-gray-700 flex items-center justify-center text-2xl flex-shrink-0">
+            <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-3xl">
               📊
             </div>
-            <div className="flex-1">
-              <p className="font-bold text-white text-base">KPI Dashboard</p>
-              <p className="text-gray-300 text-sm mt-0.5">Métricas y estadísticas globales</p>
+            <div>
+              <p className="font-bold text-white text-[15px] leading-tight flex flex-col"><span>KPI</span><span>Dashboard</span></p>
+              <p className="text-gray-400 text-[11px] mt-1.5 font-medium uppercase tracking-wider">Ver Análisis</p>
             </div>
-            <span className="text-gray-400 text-xl">›</span>
+          </Link>
+
+          <Link
+            href="/tendencias"
+            className="bg-gradient-to-br from-blue-600 to-indigo-700 border border-indigo-500 rounded-3xl shadow-md p-5 flex flex-col items-center justify-center text-center gap-2 hover:shadow-lg transition-shadow active:scale-[0.98] col-span-2"
+          >
+            <div className="w-16 h-16 mb-1 rounded-full bg-white/20 flex items-center justify-center text-4xl">
+              📈
+            </div>
+            <div>
+              <p className="font-bold text-white text-[16px] leading-tight">Tendencia de Mercado</p>
+              <p className="text-indigo-200 text-[12px] mt-1.5 font-medium uppercase tracking-widest text-balance">Acontecimientos y Recomendaciones HND</p>
+            </div>
           </Link>
         </div>
       </main>
