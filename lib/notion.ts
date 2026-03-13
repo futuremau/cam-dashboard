@@ -61,19 +61,19 @@ export async function createCierreRecord(data: CierreData) {
       Id: { title: [{ text: { content: data.fecha } }] },
       Fecha: { date: { start: data.fecha } },
       Efectivo: { number: data.efectivo || 0 },
-      Papelería: { number: data.papeleria || 0 },
-      "POS BAC": { number: data.posBac || 0 },
+      Papeleria: { number: data.papeleria || 0 },
+      "POS Bac": { number: data.posBac || 0 },
       "POS Banrural": { number: data.posBanrural || 0 },
       Transferencias: { number: data.transferencias || 0 },
       "Com Agentes Diario": { number: data.comAgentes || 0 },
       "Com BAC": { number: data.comBac || 0 },
-      "Com BanPaís": { number: data.comBanpais || 0 },
+      "Com Banpais": { number: data.comBanpais || 0 },
       "Com Ficohsa": { number: data.comFicohsa || 0 },
       "Com Tigo Money": { number: data.comTigoMoney || 0 },
       "Com BanRural": { number: data.comBanrural || 0 },
-      "Com Atlántida": { number: data.comAtlantida || 0 },
+      "Com Atlantida": { number: data.comAtlantida || 0 },
       "Com Occidente": { number: data.comOccidente || 0 },
-      "Com Interés Cuenta": { number: data.comInteres || 0 },
+      "Com interes Cuenta": { number: data.comInteres || 0 },
     },
   });
 }
@@ -144,11 +144,11 @@ export async function getRecentRecords(limit = 30) {
     
     // Extracción detallada para KPIs
     const efectivo = props.Efectivo?.number ?? null;
-    const posBac = props["POS BAC"]?.number ?? null;
+    const posBac = props["POS Bac"]?.number ?? null;
     const bac = props.BAC?.number ?? null;
-    const atlantida = props["Atlántida"]?.number ?? null;
+    const atlantida = props["Atlantida"]?.number ?? null;
     const ficohsa = props.Ficohsa?.number ?? null;
-    const banpais = props["BanPaís"]?.number ?? null;
+    const banpais = props["Banpais"]?.number ?? null;
     const occidente = props.Occidente?.number ?? null;
     const banrural = props.BanRural?.number ?? null;
     const tigoMoney = props["Tigo Money"]?.number ?? null;
